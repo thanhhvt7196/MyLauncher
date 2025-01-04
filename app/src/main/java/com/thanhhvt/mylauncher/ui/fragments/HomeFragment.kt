@@ -1,5 +1,11 @@
 package com.thanhhvt.mylauncher.ui.fragments
 
+import android.content.Context
+import android.content.Intent
+import android.content.pm.ShortcutInfo
+import android.content.pm.ShortcutManager
+import android.graphics.drawable.Icon
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +14,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import com.thanhhvt.mylauncher.R
 import com.thanhhvt.mylauncher.databinding.FragmentHomeBinding
+import com.thanhhvt.mylauncher.ui.activities.SettingsActivity
 import com.thanhhvt.mylauncher.utils.constants.Constants
 import com.thanhhvt.mylauncher.utils.extensions.isDefaultLauncher
 import com.thanhhvt.mylauncher.utils.extensions.showLauncherSelector
@@ -47,5 +54,20 @@ class HomeFragment : Fragment() {
         viewBinding?.let {
             it.setDefaultLauncherButton.isVisible = !it.root.context.isDefaultLauncher()
         }
+    }
+
+    fun createShortcut(context: Context) {
+        val shortcutManager = context.getSystemService(ShortcutManager::class.java)
+
+        val shortcut = ShortcutInfo.Builder(context, "settings_shortcut")
+            .setShortLabel("Settings")
+            .setLongLabel("Open Settings")
+            .setIcon(Icon.createWithResource(context, R.drawable.ic_launcher_foreground))
+            .setIntent(Intent(context, SettingsActivity::class.java).apply {
+                action = Intent.ACTION_VIEW
+            })
+            .build()
+
+        shortcutManager?.dynamicShortcuts = listOf(shortcut)
     }
 }
