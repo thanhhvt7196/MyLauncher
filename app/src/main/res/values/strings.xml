@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MyLauncher</string>
+    <string name="set_as_default_launcher"><u>Set as default launcher</u></string>
 </resources>

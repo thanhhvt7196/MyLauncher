@@ -2,7 +2,14 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.kapt)
 }
+
+//repositories {
+//    google()
+//    mavenCentral()
+//    maven { url = uri("https://jitpack.io") }
+//}
 
 android {
     namespace = "com.thanhhvt.mylauncher"
@@ -37,10 +44,13 @@ android {
     buildFeatures {
         compose = true
         viewBinding = true
+        dataBinding = true
+        buildConfig = true
     }
 }
 
 dependencies {
+    implementation(libs.connect.sdk)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.gson)
