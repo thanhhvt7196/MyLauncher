@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN"/>
+            <category android:name="android.intent.category.LAUNCHER"/>
+        </intent>
+    </queries>
+
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
     <uses-permission
@@ -15,6 +22,7 @@
         tools:ignore="ProtectedPermissions" />
 
     <application
+        android:name=".application.MyLauncherApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -23,7 +31,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activities.SettingsActivity"
+            android:name=".ui.activities.settings.SettingsActivity"
             android:exported="true" >
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -31,7 +39,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activities.HomeActivity"
+            android:name=".ui.activities.home.HomeActivity"
             android:configChanges="uiMode"
             android:excludeFromRecents="true"
             android:exported="true"

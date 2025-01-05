@@ -1,4 +1,4 @@
-package com.thanhhvt.mylauncher.ui.activities
+package com.thanhhvt.mylauncher.ui.activities.settings
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
