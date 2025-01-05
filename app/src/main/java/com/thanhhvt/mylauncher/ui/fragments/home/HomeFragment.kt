@@ -56,9 +56,8 @@ class HomeFragment : Fragment() {
         viewBinding?.let { it ->
             adapter = HomeAppAdapter(homeViewModel?.listApps?.value ?: emptyList())
             it.recyclerView.isVerticalScrollBarEnabled = false
-//            it.recyclerView.isHorizontalScrollBarEnabled = false
-//            val snapHelper = PagerSnapHelper()
-//            snapHelper.attachToRecyclerView(it.recyclerView)
+            it.recyclerView.isHorizontalScrollBarEnabled = false
+
             val itemTouchHelperCallback = object : ItemTouchHelper.Callback() {
                 override fun getMovementFlags(
                     recyclerView: RecyclerView,
@@ -74,13 +73,6 @@ class HomeFragment : Fragment() {
                     viewHolder: RecyclerView.ViewHolder,
                     target: RecyclerView.ViewHolder
                 ): Boolean {
-//                    val adapter = recyclerView.adapter
-//                    fromPosition = viewHolder.adapterPosition
-//                    toPosition = target.adapterPosition
-//                    adapter?.notifyItemMoved(fromPosition, toPosition)
-//                    Log.d("from position 1", fromPosition.toString())
-//                    Log.d("to position 1", toPosition.toString())
-//                    return true
                     return true
                 }
 
@@ -142,17 +134,17 @@ class HomeFragment : Fragment() {
 
     private fun updateRecyclerViewLayout() {
         viewBinding?.let {
-            val spanCount = 4
-            val rowsPerPage = 6
-//            val layoutManager =
-//                GridLayoutManager(requireContext(), spanCount, RecyclerView.HORIZONTAL, false)
-//            layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-//                override fun getSpanSize(position: Int) = 6 / spanCount
-//            }
-            val layoutManager =
-                GridLayoutManager(requireActivity(), spanCount, RecyclerView.VERTICAL, false)
-            layoutManager.isItemPrefetchEnabled = true
+            val columnsPerPage = 4
+            val rowsPerPage = 5
+            val layoutManager = GridLayoutManager(
+                requireActivity(),
+                rowsPerPage,
+                GridLayoutManager.HORIZONTAL,
+                false
+            )
             it.recyclerView.layoutManager = layoutManager
+            val snapHelper = PagerSnapHelper()
+            snapHelper.attachToRecyclerView(it.recyclerView)
         }
     }
 
