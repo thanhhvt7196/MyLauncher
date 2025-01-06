@@ -50,6 +50,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.draglistview)
     implementation(libs.androidx.multidex)
     implementation(libs.glide)
     implementation(libs.androidx.navigation.ui.ktx)

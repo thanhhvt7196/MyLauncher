@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
+import android.graphics.Rect
 import android.graphics.drawable.Icon
 import android.os.Bundle
 import android.util.Log
@@ -17,11 +18,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.thanhhvt.mylauncher.databinding.FragmentHomeBinding
 import com.thanhhvt.mylauncher.models.appInfo.AppInfo
 import com.thanhhvt.mylauncher.ui.activities.home.HomeActivity
 import com.thanhhvt.mylauncher.ui.activities.home.HomeViewModel
 import com.thanhhvt.mylauncher.ui.fragments.home.components.HomeAppAdapter
+import com.thanhhvt.mylauncher.utils.extensions.toPx
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -138,13 +141,25 @@ class HomeFragment : Fragment() {
             val rowsPerPage = 5
             val layoutManager = GridLayoutManager(
                 requireActivity(),
-                rowsPerPage,
-                GridLayoutManager.HORIZONTAL,
+                columnsPerPage,
+                GridLayoutManager.VERTICAL,
                 false
             )
             it.recyclerView.layoutManager = layoutManager
-            val snapHelper = PagerSnapHelper()
-            snapHelper.attachToRecyclerView(it.recyclerView)
+            val itemDecoration = object : ItemDecoration() {
+                override fun getItemOffsets(
+                    outRect: Rect,
+                    view: View,
+                    parent: RecyclerView,
+                    state: RecyclerView.State
+                ) {
+                    val padding = 6f.toPx(it.root.context)
+                    outRect.set(padding, padding, padding, padding)
+                }
+            }
+            it.recyclerView.addItemDecoration(itemDecoration)
+//            val snapHelper = PagerSnapHelper()
+//            snapHelper.attachToRecyclerView(it.recyclerView)
         }
     }
 
