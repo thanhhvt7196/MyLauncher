@@ -1,25 +1,22 @@
 pluginManagement {
     repositories {
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
-            }
-        }
         mavenCentral()
+        google()
         gradlePluginPortal()
-        maven { url = uri("https://jitpack.io") }
     }
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        google()
         mavenCentral()
-        maven { url = uri("https://jitpack.io") }
+        google()
+        maven(url = "https://jitpack.io")
     }
 }
+include (":IconLoader")
+project(":IconLoader").projectDir =  File(rootDir, "iconloaderlib")
 
-rootProject.name = "MyLauncher"
-include(":app")
+//include ':SharedLibWrapper'
+//project(':SharedLibWrapper').projectDir = new File(rootDir, 'SharedLibWrapper')
+
+include (":systemUIPluginCore")
